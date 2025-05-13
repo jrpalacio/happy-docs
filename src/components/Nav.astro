@@ -1,8 +1,22 @@
+---
+import BuildingStore from '../assets/svg/building-store.svg';
+import { shopLink } from '../constants/happy-live';
+import Drop from '../assets/svg/drop.svg';
+---
 <header class="sticky top-0 z-50 border-b border-neutral-200 bg-white/90 backdrop-blur-md dark:bg-neutral-900/90">
     <nav class="w-full  px-5 py-4 flex justify-between text-neutral-900 dark:text-neutral-100">
         <a href="/">CBD Docs</a>
-        <ul class="flex gap-4">
-            <li><a href="/dosis">Dosis</a></li>
+        <ul class="flex items-center gap-4">
+            <li>
+              <a href="/dosis" class="group flex items-center pl-2 text-[15px] opacity-80 transition-opacity hover:opacity-100 md:pl-3">
+                <Drop class="size-5 mr-2" /> <span  class="md:block block">Dosis</span>
+              </a>
+            </li>
+            <li>
+              <a href={shopLink.href} target="_blank" class="opacity-80 transition-opacity hover:opacity-100" title={shopLink.title}>
+                <BuildingStore class="size-5"/>
+              </a>
+            </li>
         </ul>
     </nav>
 </header>
