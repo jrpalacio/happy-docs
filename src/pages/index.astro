@@ -1,11 +1,13 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import Gallery from '../components/Gallery.astro';
+import { shopLink } from '../constants/happy-live';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const productos: CollectionEntry<'productos'>[] = await getCollection('productos');
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Happy Docs">
+  <Gallery productos={productos} carrito={shopLink.href} />
 </Layout>
