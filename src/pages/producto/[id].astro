@@ -1,0 +1,76 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import ArrowLeft from '../../assets/svg/arrowl.svg';
+import Section from '../../components/Section.astro';
+
+export async function getStaticPaths() {
+  const productos = await getCollection('productos');
+  return productos.map(producto => ({
+    params: { id: producto.slug },
+    props: { producto }
+  }));
+}
+
+const { producto } = Astro.props;
+const { data } = producto;
+const { precio_publico, img, nombre, description, ingredientes } = data;
+
+const { Content } = await render(producto);
+
+const carrito = 'https://s.happylive.mx:1035/h/iCommerce/templates/Happylive/CarritoCompras/index.jsp?ID=2270';
+
+--- 
+
+<Layout>
+  <Section>
+    <header class="flex justify-between items-center">
+      <h2 class="font-bold leading-snug tracking-normal text-white my-6 w-full text-2xl lg:max-w-3xl lg:text-4xl">
+       <a href="/" class="flex items-center gap-2 "><ArrowLeft /> {nombre} </a>
+      </h2>
+      <p class="bg-amber-400 font-bold text-[rgb(23,23,23)] rounded-3xl py-1 px-2">${precio_publico}.00</p>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-[354px_1fr] gap-8">
+      <div class="flex flex-col items-center">
+        <Image 
+          src={img} 
+          alt={nombre} 
+          class="object-contain w-[264px] rounded-2xl shadow-lg"
+          
+          width={264}
+          height={264}
+          loading="lazy"
+          decoding="async"
+          />
+        <!-- llamada a la acción de comprar -->
+          
+        <a 
+        href={carrito}
+        target="_blank"
+        class="mt-4 text-lg font-bold rounded-full border border-[#ff7d00] bg-[#ff7d00] px-6 py-2 text-[#282828]"
+        >
+        Comprar en Happy Live
+        </a>
+        <div class="mt-8">
+          <p class="text-lg text-gray-300 text-pretty">{description}</p>
+          <h3 class="text-2xl font-bold text-gray-300 mt-9 mb-6">💚 ¿Qué contiene?</h3>
+          <ul>
+            {ingredientes.map(ingrediente => (
+              <li class="text-lg text-gray-300 mt-2">✅ {ingrediente}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      
+      <article class="prose inverted prose-invert text-lg" >
+        <Content />
+      </article>
+    </div>
+  </Section>
+</Layout>
+
+<style>
+    
+</style>
