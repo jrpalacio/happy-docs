@@ -2,12 +2,13 @@
 import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import Gallery from '../components/Gallery.astro';
 import { shopLink } from '../constants/happy-live';
+import FilterProducts from '../components/FilterProducts.vue';
 
 const productos: CollectionEntry<'productos'>[] = await getCollection('productos');
+
 ---
 
 <Layout title="Happy Docs">
-  <Gallery productos={productos} carrito={shopLink.href} />
+  <FilterProducts client:load items={productos} shopLink={shopLink.href}/>
 </Layout>
