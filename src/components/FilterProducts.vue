@@ -27,21 +27,42 @@ const filteredProducts = computed(() => {
   if (selected.value === null) return products.value
   return products.value.filter(p => p.tipo === selected.value)
 })
+
+const asideClass = "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0"
+const navClass = "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0"
+const buttonClass = "w-full flex items-center justify-between space-x-3 rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"
+const spanClass = "px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline"
+const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
 </script>
 
 <template>
-  <aside class="z-50 w-full overflow-y-auto overflow-x-hidden md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0 bg-white dark:bg-neutral-900 opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 md:border-r">
+  <aside :class="asideClass">
     <div class="md:px-3 md:py-6">
-      <nav id="product-filter-nav" class="flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0">
-      <button @click="selected = null" class="filter-link flex w-full items-center space-x-3 justify-between rounded-md p-2 transition-none duration-100 hover:text-dark dark:hover:text-white hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm bg-neutral-200 font-medium text-dark dark:bg-neutral-700/30 dark:text-white" >Todos</button> 
-      <button @click="selected = 1"  class="filter-link flex w-full items-center space-x-3 justify-between rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"><span>Aceites</span> <span class="px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline">6</span> </button>
-      <button @click="selected = 2"  class="filter-link flex w-full items-center space-x-3 justify-between rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"><span>Topicos</span> <span class="px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline">3</span> </button>
-      <button @click="selected = 3"  class="filter-link flex w-full items-center space-x-3 justify-between rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"><span>Crema</span> <span class="px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline">2</span> </button>
-      <button @click="selected = 4"  class="filter-link flex w-full items-center space-x-3 justify-between rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"><span>Gomitas</span> <span class="px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline">1</span> </button>
+      <nav :class="navClass">
+      <button @click="selected = null" :class="[buttonClass, selected === null ? selectedButtonClass : '']" >
+        <span>Todos</span>
+        <span :class="spanClass">{{products.length}}</span>
+      </button> 
+      <button @click="selected = 1"  :class="[buttonClass, selected === 1 ? selectedButtonClass : '']">
+        <span>Aceites</span> 
+        <span :class="spanClass">6</span> 
+      </button>
+      <button @click="selected = 2"  :class="[buttonClass, selected === 2 ? selectedButtonClass : '']">
+        <span>Topicos</span> 
+        <span :class="spanClass">3</span> 
+      </button>
+      <button @click="selected = 3"  :class="[buttonClass, selected === 3 ? selectedButtonClass : '']">
+        <span>Cremas</span> 
+        <span :class="spanClass">2</span> 
+      </button>
+      <button @click="selected = 4"  :class="[buttonClass, selected === 4 ? selectedButtonClass : '']">
+        <span>Gomitas</span> 
+        <span :class="spanClass">1</span> 
+      </button>
       </nav>
     </div>
   </aside>
-  <section class="products">
+  <section class="products md:ml-[calc(14rem)] p-4 md:p-8 lg:p-16">
     <article
       v-for="producto in filteredProducts"
       :key="producto.nombre"
@@ -110,4 +131,3 @@ const filteredProducts = computed(() => {
   }
 	
 </style>
-
