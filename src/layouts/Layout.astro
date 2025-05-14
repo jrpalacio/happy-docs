@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import Nav from '../components/Nav.astro';
+import { ClientRouter } from 'astro:transitions';
 const { title } = Astro.props;
 ---
 <!doctype html>
@@ -11,8 +12,10 @@ const { title } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		<ClientRouter />
+		<meta name="theme-color" content="#0B3D2E" />
 	</head>
-	<body class="min-h-screen scroll-smooth antialiased selection:bg-neutral-700 selection:text-neutral-300">
+	<body class="min-h-screen scroll-smooth bg-[#0B3D2E] antialiased selection:bg-neutral-700 selection:text-neutral-300">
 		<Nav />
 		<slot />
 	</body>
