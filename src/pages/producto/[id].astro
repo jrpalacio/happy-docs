@@ -66,12 +66,19 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
           </ul>
         </div>
       </div>
+
+
+      <article class="prose prose-invert text-lg mt-8" >
+        <Content />
+      </article>
+
       
-      
+    </div>
+
       {/* si hay mas de un elemento, mostrarlos todos  */}
       { 
         testimonio.length > 1 && (  
-        <h2 class="text-3xl font-semibold text-gray-100 mt-12 mb-6">Testimonios de Clientes Felices </h2>
+        <h2 class="text-2xl font-bold text-gray-100 mt-12 mb-6"> 💬 Lo que dicen quienes lo prueban </h2>
           <div class="flex items-center overflow-x-scroll gap-4 py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-happy-pink scrollbar-track-gray-700/50 rounded">
             {testimonio.map((testimonio) => {
               return (
@@ -81,14 +88,6 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
           </div>
         )
       }
-
-      <article class="prose prose-invert text-lg mt-8" >
-        <Content />
-      </article>
-
-      
-    </div>
-
     
   </Section>
 </Layout>
