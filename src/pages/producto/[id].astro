@@ -28,7 +28,7 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
 
 <Layout>
   <Section>
-    <header class="flex justify-between items-center border border-blue-500 py-6">
+    <header class="flex justify-between items-center py-6">
       <h2 class="leading-snug text-white">
        <a href="/" class="flex items-center gap-2 "><ArrowLeft /> <span class="ml-2 font-bold text-2xl">{nombre}</span></a>
       </h2>
@@ -36,7 +36,7 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
     </header>
 
     <div>
-      <div class="flex flex-col items-center border border-red-500">
+      <div class="flex flex-col items-center">
         <Image 
           src={img} 
           alt={nombre} 
@@ -67,11 +67,12 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
         </div>
       </div>
       
-      <h2 class="text-3xl font-bold text-center text-gray-100 mt-12 mb-6">🌟 Testimonios de Clientes Felices 🌟</h2>
+      
       {/* si hay mas de un elemento, mostrarlos todos  */}
       { 
         testimonio.length > 1 && (  
-          <div class="flex overflow-x-scroll gap-4 py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-happy-pink scrollbar-track-gray-700/50 rounded">
+        <h2 class="text-3xl font-semibold text-gray-100 mt-12 mb-6">Testimonios de Clientes Felices </h2>
+          <div class="flex items-center overflow-x-scroll gap-4 py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-happy-pink scrollbar-track-gray-700/50 rounded">
             {testimonio.map((testimonio) => {
               return (
                 <Testimonials testimonio={testimonio} />
