@@ -47,13 +47,3 @@ Ideal para quienes buscan una alternativa natural, efectiva y sin efectos psicoa
 
 Toma **1 gota por cada 10 kg de peso corporal**.  
 Comienza con dosis pequeñas y aumenta progresivamente si lo necesitas.
-
-## 💬 Lo que dicen quienes lo prueban
-
-_"Volví a dormir bien después de años con insomnio. Me siento más tranquila y sin dolor."_
-
----
-
-¿Lista para reconectar con tu bienestar?
-
-✨ Prueba **Happy Drop** y siente la diferencia desde la primera semana.
