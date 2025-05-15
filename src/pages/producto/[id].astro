@@ -4,6 +4,8 @@ import Layout from '../../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import ArrowLeft from '../../assets/svg/arrowl.svg';
 import Section from '../../components/Section.astro';
+import { testimonios } from '../../data/testimonios';
+import Testimonials from '../../components/Testimonials.astro';
 
 export async function getStaticPaths() {
   const productos = await getCollection('productos');
@@ -21,19 +23,20 @@ const { Content } = await render(producto);
 
 const carrito = 'https://s.happylive.mx:1035/h/iCommerce/templates/Happylive/CarritoCompras/index.jsp?ID=2270';
 
+const testimonio = testimonios.filter(testimonio => testimonio.producto === nombre);
 --- 
 
 <Layout>
   <Section>
-    <header class="flex justify-between items-center">
-      <h2 class="font-bold leading-snug tracking-normal text-white my-6 w-full text-2xl lg:max-w-3xl lg:text-4xl">
-       <a href="/" class="flex items-center gap-2 "><ArrowLeft /> {nombre} </a>
+    <header class="flex justify-between items-center border border-blue-500 py-6">
+      <h2 class="leading-snug text-white">
+       <a href="/" class="flex items-center gap-2 "><ArrowLeft /> <span class="ml-2 font-bold text-2xl">{nombre}</span></a>
       </h2>
-      <p class="bg-amber-400 font-bold text-[rgb(23,23,23)] rounded-3xl py-1 px-2">${precio_publico}.00</p>
+      <p class="bg-amber-400 font-semibold text-[rgb(23,23,23)] rounded-3xl py-1 px-2">${precio_publico}.00</p>
     </header>
 
-    <div class="grid grid-cols-1 lg:grid-cols-[354px_1fr] gap-8">
-      <div class="flex flex-col items-center">
+    <div>
+      <div class="flex flex-col items-center border border-red-500">
         <Image 
           src={img} 
           alt={nombre} 
@@ -64,10 +67,28 @@ const carrito = 'https://s.happylive.mx:1035/h/iCommerce/templates/Happylive/Car
         </div>
       </div>
       
-      <article class="prose inverted prose-invert text-lg" >
+      <h2 class="text-3xl font-bold text-center text-gray-100 mt-12 mb-6">🌟 Testimonios de Clientes Felices 🌟</h2>
+      {/* si hay mas de un elemento, mostrarlos todos  */}
+      { 
+        testimonio.length > 1 && (  
+          <div class="flex overflow-x-scroll gap-4 py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-happy-pink scrollbar-track-gray-700/50 rounded">
+            {testimonio.map((testimonio) => {
+              return (
+                <Testimonials testimonio={testimonio} />
+              )
+            })}
+          </div>
+        )
+      }
+
+      <article class="prose prose-invert text-lg mt-8" >
         <Content />
       </article>
+
+      
     </div>
+
+    
   </Section>
 </Layout>
 
