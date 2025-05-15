@@ -4,7 +4,7 @@ import Nav from '../components/Nav.astro';
 import { ClientRouter } from 'astro:transitions';
 const { title } = Astro.props;
 const siteUrl = 'https://happy-docs.vercel.app/'
-const description = "Sitio web con contenido acerca del cbd, sus usos, beneficios y dosificación de productos de Happy Live"
+const description = "Conoce los usos, beneficios y dosificación del CBD de Happy Live"
 ---
 <!doctype html>
 <html lang="es">
@@ -25,7 +25,7 @@ const description = "Sitio web con contenido acerca del cbd, sus usos, beneficio
 	  
 		<!-- SEO -->
 		<meta name="description" content={description} />
-		<meta name="keywords" content="CBD, USOS, BENEFICIOS, DOSIFICACIÓN" />
+		<meta name="keywords" content="CBD, USOS, BENEFICIOS, DOSIFICACIÓN, HAPPY LIVE, HAPPY DOCS" />
 		<meta name="author" content="José Reyes Palacio" />
 		<meta name="robots" content="index, follow" />
 		<meta name="generator" content="Astro" />
@@ -67,6 +67,55 @@ const description = "Sitio web con contenido acerca del cbd, sus usos, beneficio
 			</script>
 			
 	</head>	
+
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#f8fafc" />
+		<meta name="description" content="Happy Docs es el sitio web con contenido sobre CBD, sus usos, beneficios y dosificación de productos Happy Live." />
+		<meta name="keywords" content="CBD, Cannabidiol, Happy Live, salud natural, aceites, gomitas, bienestar" />
+		<meta name="author" content="José Reyes Palacio" />
+		<meta name="robots" content="index, follow" />
+	  
+		<!-- Canonical 
+		<link rel="canonical" href={siteUrl} />-->
+	  
+		<!-- Favicon -->
+		<link rel="icon" type="image/png" href="/favicon.png" />
+	  
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content="Conoce Happy Docs, el sitio oficial con toda la información de los productos Happy Live y sus beneficios." />
+		<meta property="og:image" content="https://happy-docs.vercel.app/og-image.png" />
+		<meta property="og:url" content="https://happy-docs.vercel.app/" />
+	  
+		<!-- Twitter Card -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content="Descubre todo sobre Happy Live y cómo mejorar tu bienestar con CBD." />
+		<meta name="twitter:image" content="https://happy-docs.vercel.app/og-image.png" />
+		<meta name="twitter:creator" content="@jrpalacio" />
+	  
+		<!-- Título de la página -->
+		<title>{title}</title>
+	  
+		<!-- Schema JSON-LD (opcional pero recomendado) -->
+		<script type="application/ld+json">
+		  {
+			"@context": "https://schema.org",
+			"@type": "WebSite",
+			"name": "Happy Docs",
+			"url": "https://happy-docs.vercel.app/",
+			"author": {
+			  "@type": "Person",
+			  "name": "José Reyes Palacio"
+			},
+			"description": "Happy Docs es el sitio web con contenido sobre CBD, sus usos, beneficios y dosificación de productos Happy Live."
+		  }
+		</script>
+	  </head>
+	  
 	<body class="min-h-screen scroll-smooth bg-[#0B3D2E] antialiased selection:bg-neutral-700 selection:text-neutral-300 dark:bg-[#161a19]">
 		<Nav />
 		<slot />
