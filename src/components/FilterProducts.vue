@@ -143,16 +143,17 @@ const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
 .list-move,
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1); /* More dynamic easing */
 }
 
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(30px) scale(0.95); /* Enter/leave from/to scaled and slightly below */
 }
 
 .list-leave-active {
   position: absolute;
+  /* width: 100%; Consider if items are in a grid/flex row and collapse */
 }
 </style>
