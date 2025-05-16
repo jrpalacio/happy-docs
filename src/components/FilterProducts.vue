@@ -30,7 +30,7 @@ const filteredProducts = computed(() => {
 
 const asideClass = "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0"
 const navClass = "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0"
-const buttonClass = "w-full flex items-center justify-between space-x-3 rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"
+const buttonClass = "w-full flex items-center justify-center md:justify-between space-x-3 rounded-md p-2 transition-none duration-100 text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm"
 const spanClass = "px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline"
 const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
 </script>
