@@ -23,7 +23,7 @@ const { Content } = await render(producto);
 
 const carrito = 'https://s.happylive.mx:1035/h/iCommerce/templates/Happylive/CarritoCompras/index.jsp?ID=2270';
 
-const testimonio = testimonios.filter(testimonio => testimonio.producto === nombre);
+const testimonio = testimonios.filter(testimonials => testimonials.producto.toLowerCase() === nombre.toLowerCase());
 --- 
 
 <Layout>
@@ -77,7 +77,7 @@ const testimonio = testimonios.filter(testimonio => testimonio.producto === nomb
 
       {/* si hay mas de un elemento, mostrarlos todos  */}
       { 
-        testimonio.length > 1 && (  
+        testimonio.length >= 1 && (  
         <h2 class="text-2xl font-bold text-gray-100 mt-12 mb-6"> 💬 Lo que dicen quienes lo prueban </h2>
           <div class="flex items-center overflow-x-scroll gap-4 py-4 px-2 sm:px-4 scrollbar-thin scrollbar-thumb-happy-pink scrollbar-track-gray-700/50 rounded">
             {testimonio.map((testimonio) => {
