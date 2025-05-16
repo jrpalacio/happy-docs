@@ -48,10 +48,6 @@ Perfecto para quienes desean relajarse y mejorar su salud con un sabor natural y
 Toma **1 gota por cada 10 kg de peso corporal**.  
 Empieza con dosis pequeñas e incrementa si es necesario.
 
-## 💬 Lo que dicen quienes lo prueban
-
-_"Es mi favorito por el sabor. Me relaja mucho y me ayuda a dormir mejor sin sentirme pesada."_
-
 ---
 
 💛 Disfruta tu rutina diaria con una gota de alivio y dulzura.  

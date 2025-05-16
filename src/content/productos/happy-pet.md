@@ -47,10 +47,6 @@ Ideal para perros y gatos que necesitan apoyo físico y emocional.
 Toma **1 gota por cada 2 kg de peso corporal**.  
 Comienza con media dosis y ajústala poco a poco.
 
-## 💬 Lo que dicen quienes lo prueban
-
-_"Mi perrita ya no tiembla por ansiedad cuando salgo. Está más tranquila y juguetona."_
-
 ---
 
 🐾 Porque su salud también importa.  

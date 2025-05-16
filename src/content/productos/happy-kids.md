@@ -47,10 +47,6 @@ Con un sabor a moras que les encanta y una fórmula de CBD aislado segura para e
 Toma **1 gota por cada 5 kg de peso corporal**.  
 Empieza con una dosis baja y ajústala según necesidades.
 
-## 💬 Lo que dicen quienes lo prueban
-
-_"Mi hijo duerme mejor y está más tranquilo durante el día. Notamos una diferencia en su comportamiento."_
-
 ---
 
 👩‍👧 Regálale a tu peque lo que necesita para crecer en paz.  

@@ -49,10 +49,6 @@ Ideal para quienes quieren más claridad, sin cafeína ni efectos secundarios.
 Toma **1 gota por cada 10 kg de peso corporal**.  
 Inicia con dosis pequeñas y aumenta si es necesario.
 
-## 💬 Lo que dicen quienes lo prueban
-
-_"Estoy más enfocada en el trabajo y siento que mi mente está más despierta desde que lo uso."_
-
 ---
 
 Potencia tu mente sin forzarla.  

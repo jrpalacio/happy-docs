@@ -47,10 +47,6 @@ Una mezcla efectiva de CBD, CBN, melatonina y lavanda que relaja tu cuerpo y pre
 Toma **1 gota por cada 10 kg de peso corporal** antes de dormir.  
 Comienza con poca cantidad y ajústala según tu necesidad.
 
-## 💬 Lo que dicen quienes lo prueban
-
-_"Después de años con insomnio, por fin descanso toda la noche sin interrupciones. ¡Es una maravilla!"_
-
 ---
 
 Despídete del insomnio y dale la bienvenida al descanso real.  
