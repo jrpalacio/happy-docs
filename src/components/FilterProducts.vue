@@ -62,7 +62,11 @@ const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
       </nav>
     </div>
   </aside>
-  <section class="products md:ml-[calc(14rem)] p-4 md:p-8 lg:p-16">
+  <TransitionGroup
+    tag="section"
+    name="list"
+    class="products md:ml-[calc(14rem)] p-4 md:p-8 lg:p-16"
+  >
     <article
       v-for="producto in filteredProducts"
       :key="producto.nombre"
@@ -104,7 +108,7 @@ const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
         </footer>
       </div>
     </article>
-  </section>
+  </TransitionGroup>
 </template>
 
 <style scoped>
@@ -133,4 +137,22 @@ const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30'
     -webkit-line-clamp: 2;
   }
 	
+</style>
+
+<style>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
 </style>
