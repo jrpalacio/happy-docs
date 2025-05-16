@@ -29,8 +29,7 @@ description: "Fórmula con CBD de espectro completo especialmente creada para ap
 
 ## 🐶 Amor y alivio en cada gota
 
-Ellos también sienten ansiedad, dolor o decaimiento.  
-**Happy Pet** está diseñado para cuidar a tu mascota de forma natural, con ingredientes que le devuelven la vitalidad y el bienestar.
+Ellos también sienten ansiedad, dolor o decaimiento.  **Happy Pet** está diseñado para cuidar a tu mascota de forma natural, con ingredientes que le devuelven la vitalidad y el bienestar.
 
 Ideal para perros y gatos que necesitan apoyo físico y emocional.
 
