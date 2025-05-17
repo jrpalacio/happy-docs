@@ -65,7 +65,7 @@ export const testimonios: testimonio[] = [
   {
     producto: "Happy Drop",
     usuario: "José Reyes",
-    descripcion: "Me ayudo a controlar miedo, ansiedad, dolor crónico, mantener niveles de estrés bajo, a bajar de peso y a mejorar mi salud general.",
+    descripcion: "No queria tomar medicamentos para controlar episodios de ansiedad, dolor crónico y dolor muscular, por eso decido probar Happy Drop y me resulto excelente.",
     img: "/profiles/jose-reyes.png"
   },
   {
