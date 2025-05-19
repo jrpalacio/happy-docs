@@ -2,9 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import TimeHeader from '../components/TimeHeader.vue';
 import HappyLog from '../components/HappyLog/index.vue';
+import HappyDropper from '../assets/images/happy-dropper.webp';
 ---
 
 <Layout title="Dosis">
 	<HappyLog client:only />
 	<TimeHeader client:load />
+	<img src={HappyDropper.src} alt="Happy Dropper" class="size-64 object-cover mx-auto mt-24">
 </Layout>

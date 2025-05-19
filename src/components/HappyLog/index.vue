@@ -5,6 +5,7 @@ import { addDay } from "@formkit/tempo"
 import IconCaretleft from './icons/IconCaretleft.vue'
 import IconCaretright from './icons/IconCaretright.vue'
 
+
 const FORMAT_DATE = "YYYY-MM-DD"
 const STR_LANG = "es"
 
@@ -33,4 +34,5 @@ const nextDate = () => {
       <IconCaretright class="size-6"/>
     </button>
   </header>
+
 </template>
