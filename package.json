@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@astrojs/vue": "^5.0.13",
+    "@formkit/tempo": "^0.1.2",
     "@tailwindcss/vite": "^4.1.6",
     "astro": "^5.7.12",
     "pinia": "^3.0.2",
