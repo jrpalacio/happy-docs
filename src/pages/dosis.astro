@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Dosificador from '../components/Dosificador.vue';
 import TimeHeader from '../components/TimeHeader.vue';
+import App from '../components/App.vue';
 ---
 
 <Layout title="Dosis">
 	<TimeHeader client:load />
-	<Dosificador/>
+	<App client:load />
 </Layout>
