@@ -1,10 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import TimeHeader from '../components/TimeHeader.vue';
-import App from '../components/App.vue';
+import HappyLog from '../components/HappyLog/index.vue';
 ---
 
 <Layout title="Dosis">
+	<HappyLog client:only />
 	<TimeHeader client:load />
-	<App client:load />
 </Layout>
