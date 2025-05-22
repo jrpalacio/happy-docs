@@ -11,5 +11,5 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [vue({ appEntrypoint: '/src/pages/_app' })],
+  integrations: [vue({ appEntrypoint: '/src/pages/_app', devtools: true })],
 });
