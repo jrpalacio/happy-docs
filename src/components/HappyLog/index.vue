@@ -1,38 +1,88 @@
-<script setup>
-import { ref } from "vue"
-import { format } from "@formkit/tempo"
-import { addDay } from "@formkit/tempo"
-import IconCaretleft from './icons/IconCaretleft.vue'
-import IconCaretright from './icons/IconCaretright.vue'
+<script setup lang="ts">
+import { ref } from 'vue'
+import { storeToRefs } from 'pinia'
+import IconDropletPlus from './icons/IconDropletPlus.vue'
+import HappyDropper from '../../assets/images/happy-dropper.webp'
+import ModalContent from './ModalContent.vue'
 
 
-const FORMAT_DATE = "YYYY-MM-DD"
-const STR_LANG = "es"
+import CalendarControl from './CalendarControl.vue'
 
-const date = ref(new Date())
-const dateFormat = ref(format(date.value, FORMAT_DATE, STR_LANG))
+import { useDropStore } from '../../stores/drop.ts'
 
-const previousDate = () => {
-  date.value = addDay(date.value, -1)
-  dateFormat.value = format(date.value, FORMAT_DATE, STR_LANG)
-}
+const showModal = ref(false)
 
-const nextDate = () => {
-  date.value = addDay(date.value, 1)
-  dateFormat.value = format(date.value, FORMAT_DATE, STR_LANG)
+const dropStore = useDropStore()
+const { addDrop } = dropStore
+const { dropList } = storeToRefs(dropStore)
+
+function agregarDrop() {
+  const drop = {
+    portion: 1,
+    timestamp: new Date(),
+    product: 1
+  }
+  addDrop(drop)
 }
 
 </script>
 
 <template>
-  <header class="flex items-center justify-between p-2 border-b border-neutral-200 dark:border-neutral-800">
-    <button type="button" class="text-orange-500 p-2" @click="previousDate">
-      <IconCaretleft class="size-6"/>
-    </button>
-    <p class="text-center text-white font-bold">{{ format(dateFormat, "long", STR_LANG) }}</p>
-    <button type="button" class="text-orange-500 p-2" @click="nextDate">
-      <IconCaretright class="size-6"/>
-    </button>
-  </header>
-
+  <CalendarControl client:only="vue"/>
+  <section class="p-4">
+    <div>
+      <slot />
+    </div>
+    
+    <main>
+      <div class="flex items-center justify-between">
+        <p class="text-white font-bold">Toma diaria de CBD</p>
+        <button @click="showModal = true" type="button" class="text-white p-2 bg-orange-500 rounded-xl">
+          <IconDropletPlus class="size-6"/>
+        </button>
+      </div>
+    
+    </main>
+    <template v-if="dropList.length">
+      <ul class="mt-4 space-y-4">
+        <li class="text-white border-b border-neutral-200 dark:border-neutral-800" v-for="drop in dropList" :key="drop.timestamp">
+          {{ drop.portion }} - {{ drop.timestamp }} - {{ drop.product }}
+        </li>
+      </ul>
+    </template>
+    <template v-else>
+      <div class="flex flex-col items-center justify-center animate-pulse">
+        <img :src="HappyDropper.src" alt="Happy Dropper" class=" size-64 object-cover mx-auto mt-24">
+        <p class="text-white font-bold">No hay tomas</p>
+      </div>
+    </template>   
+  </section>
+  <ModalContent :show="showModal" @close="showModal = false" >
+    <template #header>Agregar dosis</template>
+    <template #body>
+      <div class="flex flex-col space-y-4">
+          <label class="flex flex-col">
+            <span class="text-sm text-white font-semibold">Producto</span>
+            <div class="border border-neutral-600 p-2 rounded-lg">
+              <select name="droppers" v-model="selectedDropper" class="w-full">
+              <option value="" disabled>Elige tu producto</option>
+              <option v-for="product in products" :value="product.name" :key="product.id">
+                {{ product.name }}
+              </option>
+            </select>
+            </div>
+            
+          </label>    
+          <label class="flex flex-col">
+            <span class="text-sm text-white font-semibold">Fecha</span>
+            <input type="date" :value="dateModal" disabled class="border border-neutral-600 p-2 rounded-lg" />
+          </label>
+          <label class="flex flex-col">
+            <span class="text-sm text-white font-semibold">Hora</span>
+            <input class="time border border-neutral-600 p-2 rounded-lg" type="time" v-model="timeModal"   />
+          </label>
+          <button @click="agregarDrop" class="text-white p-2 bg-orange-500 rounded-xl">Agregar</button>
+        </div>
+    </template>
+  </ModalContent>
 </template>
