@@ -47,3 +47,23 @@ export const HAPPY_ID_TO_PRODUCT: Record<HappyLiveProductsId, HappyLiveProducts>
   12: 'Happy Sleep'
 }
 
+interface Product {
+  id: HappyLiveProductsId
+  name: HappyLiveProducts
+}
+
+export const PRODUCTS: Product[] = [
+  { id: 1, name: 'Happy Drop' },
+  { id: 2, name: 'Happy Ending' },
+  { id: 3, name: 'Happy Face Day' },
+  { id: 4, name: 'Happy Face Night' },
+  { id: 5, name: 'Happy Focus' },
+  { id: 6, name: 'Happy Gummies' },
+  { id: 7, name: 'Happy Honey' },
+  { id: 8, name: 'Happy Kids' },
+  { id: 9, name: 'Happy Oil 250ml' },
+  { id: 10, name: 'Happy Oil 60ml' },
+  { id: 11, name: 'Happy Pet' },
+  { id: 12, name: 'Happy Sleep' }
+]
+
