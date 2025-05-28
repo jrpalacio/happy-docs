@@ -1,2 +1,6 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
+
+.input-primary {
+  @apply border border-neutral-600 text-[#ec7357] font-semibold rounded-lg h-13 px-2
+}
