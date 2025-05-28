@@ -1,20 +1,31 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import type { Ref } from 'vue'
 
+type Timestamp = number | Date | string
 interface dropType {
-    portion: number,
-    timestamp: number,
-    product: number
+  portion: number,
+  timestamp: Timestamp,
+  product: number
 }
 
 export const useDropStore = defineStore('drop', ()=> {
-    const nombre = ref('Pepe')
-    const dropList = ref<dropType[]>([])
+    const dropList: Ref<dropType[]> = ref([])
     const drop = ref<dropType>({
         portion: 1,
         timestamp: 0,
         product: 1
     })
+
+    const portion = ref(1)
+
+    function getPortion() {
+        return portion.value
+    }
+
+    function setPortion(value: number) {
+        portion.value = value
+    }
 
     function getDrop() {
         return drop.value
@@ -44,7 +55,6 @@ export const useDropStore = defineStore('drop', ()=> {
     }
 
     return {
-        nombre,
         dropList,
         drop,
         addDrop,
@@ -52,6 +62,9 @@ export const useDropStore = defineStore('drop', ()=> {
         updateDrop,
         getDataByDate,
         getDrop,
-        setDrop
+        setDrop,
+        getPortion,
+        setPortion,
+        portion
     }
 })
