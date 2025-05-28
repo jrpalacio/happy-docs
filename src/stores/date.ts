@@ -19,6 +19,7 @@ interface DatePayload {
 
 export const useDateStore = defineStore('date', () => {
   const datePayload: Ref<DatePayload | null> = ref(null)
+  const time: Ref<string> = ref('')
 
   function setDatePayload({ date }: Date): void {
     datePayload.value = { 
@@ -39,11 +40,21 @@ export const useDateStore = defineStore('date', () => {
     setDatePayload({ date: now })
   }
 
+  function setTime(value: string): void {
+    time.value = value
+  }
+  function getTime(): string {
+    return time.value
+  }
 
   return {
+    datePayload,
+    time,
+    setTime,
+    getTime,
     initDate,
     setDatePayload,
     getDatePayload,
-    datePayload
+    
   }
 })
