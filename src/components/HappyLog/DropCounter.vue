@@ -5,7 +5,7 @@ import IconPlus from './icons/IconPlus.vue'
 import { onMounted, ref } from 'vue'
 import type { Ref } from 'vue'
 
-import { useDropStore } from '../../stores/drop.ts'
+import { useDropStore } from '../../stores'
 const dropStore = useDropStore()
 const { getPortion, setPortion } = dropStore  
 

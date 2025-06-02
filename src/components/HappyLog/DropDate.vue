@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { format } from "@formkit/tempo"
 import { onMounted, ref, watch } from 'vue'
-import { useDateStore } from '../../stores/date.ts'
+import { useDateStore } from '../../stores'
 
 const dateStore = useDateStore()
 const { getDatePayload, setTime } = dateStore

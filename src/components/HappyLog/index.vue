@@ -4,8 +4,10 @@ import { storeToRefs } from 'pinia'
 import HappyDropper from '../../assets/images/happy-dropper.webp'
 import CalendarControl from './CalendarControl.vue'
 
-import { useDropStore } from '../../stores/drop.ts'
+import { useDropStore } from '../../stores'
 import DropRegister from './DropRegister.vue'
+
+import { HAPPY_ID_TO_PRODUCT } from '../../constants/happy-live.ts'
 
 const dropStore = useDropStore()
 const { dropList } = storeToRefs(dropStore) 
@@ -29,7 +31,7 @@ const { dropList } = storeToRefs(dropStore)
     <template v-if="dropList.length">
       <ul class="mt-4 space-y-4">
         <li class="text-white border-b border-neutral-200 dark:border-neutral-800" v-for="drop in dropList" :key="drop.timestamp">
-          {{ drop.portion }} - {{ drop.timestamp }} - {{ drop.product }}
+          {{ drop.portion }} - {{ new Date(drop.timestamp).toLocaleDateString() }} - {{ HAPPY_ID_TO_PRODUCT[drop.product] }}
         </li>
       </ul>
     </template>

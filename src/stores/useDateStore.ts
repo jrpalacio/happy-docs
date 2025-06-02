@@ -21,7 +21,7 @@ export const useDateStore = defineStore('date', () => {
   const datePayload: Ref<DatePayload | null> = ref(null)
   const time: Ref<string> = ref('')
 
-  function setDatePayload({ date }: Date): void {
+  function setDatePayload({ date }: { date: Date }): void {
     datePayload.value = { 
       current: date, 
       dateTimeLocal: format(date, STR_DATE_TIME_FORMAT, STR_LANG),
@@ -55,6 +55,5 @@ export const useDateStore = defineStore('date', () => {
     initDate,
     setDatePayload,
     getDatePayload,
-    
   }
 })

@@ -9,10 +9,14 @@ import DropDate from './DropDate.vue'
 
 import IconDropletPlus from './icons/IconDropletPlus.vue'
 
-import { useDropStore } from '../../stores/drop.ts'
+import { useDropStore } from '../../stores'
+import { useDateStore } from '../../stores'
+
+const dateStore = useDateStore()
+const { getDatePayload, getTime } = dateStore
 
 const dropStore = useDropStore()
-const { addDrop } = dropStore
+const { addDrop, getPortion, getProduct } = dropStore
 
 const showModal = ref(false)
 
@@ -25,10 +29,17 @@ interface dropType {
 }
 
 function agregarDrop() {
+  const { shortFormat } = getDatePayload() || {}
+  if (!shortFormat) {
+    console.error('No date payload available')
+    return
+  }
+  const currentTime = shortFormat+'T'+getTime()
+  const ct = new Date(currentTime)
   const drop:dropType = {
-    portion: 1,
-    timestamp: new Date(),
-    product: 1
+    portion: getPortion(),
+    timestamp: ct.getTime(),
+    product: getProduct()
   }
   addDrop(drop)
 }
@@ -46,7 +57,7 @@ function agregarDrop() {
         <!-- Selector de gotero -->
         <DropProduct />
         <!-- Fecha y hora -->
-         <DropDate />
+        <DropDate />
         <!-- Contador de gotas -->
         <DropCounter />
         <button @click="agregarDrop" class="text-white p-2 bg-orange-500 rounded-xl">Agregar</button>

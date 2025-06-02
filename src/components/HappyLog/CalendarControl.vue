@@ -9,7 +9,7 @@ import { addDay } from "@formkit/tempo"
 import IconCaretleft from './icons/IconCaretleft.vue'
 import IconCaretright from './icons/IconCaretright.vue'
 
-import { useDateStore } from '../../stores/date.ts'
+import { useDateStore } from '../../stores'
 
 import { STR_LANG, STR_DATE_SHORT_FORMAT } from '../../constants/date_settings.ts'
 const dateStore = useDateStore()
