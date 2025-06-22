@@ -2,7 +2,7 @@ import storeIcon from '../assets/svg/building-store.svg'
 
 interface Link {
   href: string;
-  urlIcon: string;
+  urlIcon: any;
   title: string;
 }
 
@@ -12,8 +12,8 @@ export const shopLink: Link = {
   title: "Tienda en línea de Happy Live"
 }
 
-type HappyLiveProducts = 'Happy Drop' | 'Happy Ending' | 'Happy Face Day' | 'Happy Face Night' | 'Happy Focus' | 'Happy Gummies' | 'Happy Honey' | 'Happy Kids' | 'Happy Oil 250ml' | 'Happy Oil 60ml' | 'Happy Pet' | 'Happy Sleep'
-type HappyLiveProductsId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+export type HappyLiveProducts = 'Happy Drop' | 'Happy Ending' | 'Happy Face Day' | 'Happy Face Night' | 'Happy Focus' | 'Happy Gummies' | 'Happy Honey' | 'Happy Kids' | 'Happy Oil 250ml' | 'Happy Oil 60ml' | 'Happy Pet' | 'Happy Sleep'
+export type HappyLiveProductsId = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
 
 // El orden de los productos se aplica de forma ascendente 
 export const HAPPY_PRODUCT_TO_ID: Record<HappyLiveProducts, HappyLiveProductsId> = {
@@ -67,3 +67,31 @@ export const PRODUCTS: Product[] = [
   { id: 12, name: 'Happy Sleep' }
 ]
 
+export interface dropType {
+  portion: number,
+  product: HappyLiveProductsId
+}
+
+export interface productType {
+  portion: number,
+  type: HappyLiveProductsId
+}
+
+// Interfaces para el registro de productos
+export interface ProductLogEntry {
+  id: string
+  productId: HappyLiveProductsId
+  productName: HappyLiveProducts
+  portion: number
+  timestamp: number
+  date: string
+  time: string
+  notes?: string
+}
+
+export interface ProductLogFilters {
+  productId?: HappyLiveProductsId
+  dateFrom?: string
+  dateTo?: string
+  searchTerm?: string
+}
