@@ -1,81 +1,53 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Ref } from 'vue'
-
-interface dropType {
-  portion: number,
-  timestamp: number,
-  product: number
-}
+import type { dropType } from '../constants/happy-live'
 
 export const useDropStore = defineStore('drop', ()=> {
-    const dropList: Ref<dropType[]> = ref([])
-    
-    const drop = ref<dropType>({
-        portion: 1,
-        timestamp: 0,
-        product: 1
-    })
-    const product = ref(0)
-    const portion = ref(1)
+  const drop: Ref <dropType> = ref({
+    portion: 1,
+    product: 1
+  })
 
-    function getProduct(): number {
-        return product.value
-    }
+  function getDrop(): dropType {
+    return drop.value
+  }
 
-    function setProduct(value: number) {
-        product.value = value
-    }
+  function getDropPortion(): number {
+    return drop.value.portion
+  }
 
-    function getPortion() {
-        return portion.value
-    }
+  function getDropProduct(): dropType['product'] {
+    return drop.value.product
+  }
 
-    function setPortion(value: number) {
-        portion.value = value
-    }
+  function setDrop(newDrop: dropType): void {
+    drop.value = { ...newDrop }
+  }
 
-    function getDrop() {
-        return drop.value
-    }
+  function setDropPortion(portion: number): void {
+    drop.value.portion = portion
+  }
 
-    function setDrop({ portion, timestamp, product }: dropType) {
-        drop.value = { portion, timestamp, product }
-    }
-        
-    function addDrop({ portion, timestamp, product }: dropType) {
-        dropList.value.push({ portion, timestamp, product })
-    }
+  function setDropProduct(product: dropType['product']): void {
+    drop.value.product = product
+  }
 
-    function removeDrop(index: number) {
-        dropList.value.splice(index, 1)
+  function resetDrop(): void {
+    drop.value = {
+      portion: 1,
+      product: 1
     }
+  }
 
-    function updateDrop(index: number, { portion, timestamp, product }: dropType) {
-        dropList.value[index] = { portion, timestamp, product }
-    }
-
-    function getDataByDate(date: string) {
-        return dropList.value.filter((drop) => {
-            const dropDate = new Date(drop.timestamp).toLocaleDateString()
-            return dropDate === date
-        })
-    }
-
-    return {
-        dropList,
-        drop,
-        portion,
-        product,
-        addDrop,
-        removeDrop,
-        updateDrop,
-        getDataByDate,
-        getDrop,
-        setDrop,
-        getPortion,
-        setPortion,
-        getProduct,
-        setProduct,
-    }
+  return {
+    drop,
+    getDrop,
+    getDropPortion,
+    getDropProduct,
+    setDrop,
+    setDropPortion,
+    setDropProduct,
+    resetDrop
+  }
 })
