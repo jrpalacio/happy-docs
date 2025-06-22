@@ -1,3 +1,11 @@
+export interface DatePayload {
+  current: Date
+  shortFormat: string
+  longFormat: string
+  timestamp: number
+  dateTimeLocal: string
+}
+
 const DATE_FORMATS = {
   SHORT: 'YYYY-MM-DD',
   TIME: 'YYYY-MM-DDTHH:mm:ss'
