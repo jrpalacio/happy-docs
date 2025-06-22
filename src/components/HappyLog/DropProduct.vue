@@ -2,22 +2,22 @@
 import { onMounted, ref, watch } from 'vue'
 import { PRODUCTS } from '../../constants/happy-live'
 
-import { useDropStore } from '../../stores'
+import { useProductStore } from '../../stores'
 
-const dropStore = useDropStore()
-const { getProduct, setProduct } = dropStore
+const productStore = useProductStore()
+const { getProductType, setProductType } = productStore
 const products = ref(PRODUCTS)
 const selectedDropper = ref(0)
 
 onMounted(() => {
-  const productId = getProduct()
+  const productId = getProductType()
   if (productId) {
     selectedDropper.value = productId
   }
 })
 
 watch(selectedDropper, (newProduct) => {
-  setProduct(newProduct)
+  setProductType(newProduct)
 })
 
 </script>
