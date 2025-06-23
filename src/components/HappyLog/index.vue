@@ -63,9 +63,6 @@ function getProductColor(productId: number): string {
 <template>
   <CalendarControl client:only="vue"/>
   <section class="p-4">
-    <div>
-      <slot />
-    </div>
     
     <!-- Visualización de fecha -->
     <DateDisplay />
