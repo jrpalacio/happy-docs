@@ -74,6 +74,28 @@ const productCategories = computed(() => {
     .filter(cat => cat.count > 0)
 })
 
+// --- Animation Hook ---
+function onLeave(el: Element, done: () => void) {
+  const htmlEl = el as HTMLElement;
+  const { offsetLeft, offsetTop, clientWidth, clientHeight } = htmlEl;
+
+  // Pin the element to its current position before the layout shifts
+  htmlEl.style.position = 'absolute';
+  htmlEl.style.left = `${offsetLeft}px`;
+  htmlEl.style.top = `${offsetTop}px`;
+  htmlEl.style.width = `${clientWidth}px`;
+  htmlEl.style.height = `${clientHeight}px`;
+
+  // Animate it out and signal Vue when done
+  htmlEl.animate([
+    { transform: 'scale(1)', opacity: 1 },
+    { transform: 'scale(0.9)', opacity: 0 }
+  ], {
+    duration: 300,
+    easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)'
+  }).onfinish = done;
+}
+
 // --- CSS Classes ---
 const theme = {
   aside: "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
@@ -115,6 +137,7 @@ function getButtonClass(categoryId: number | null) {
     tag="section"
     name="product-grid"
     class="products md:ml-[calc(14rem)] p-4 md:p-8 lg:p-16"
+    @leave="onLeave"
   >
     <article
       v-for="(producto, index) in filteredProducts"
@@ -163,6 +186,7 @@ function getButtonClass(categoryId: number | null) {
 
 <style scoped>
 	.products {
+    position: relative; /* Contexto de posicionamiento para la animación de salida */
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
 		gap: 2rem;
@@ -200,9 +224,7 @@ function getButtonClass(categoryId: number | null) {
 }
 
 .product-grid-leave-active {
-  transition: all 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  position: absolute;
-  width: 100%;
+  /* Ya no necesitamos transiciones aquí, JS lo maneja */
 }
 
 .product-grid-enter-from {
@@ -211,8 +233,9 @@ function getButtonClass(categoryId: number | null) {
 }
 
 .product-grid-leave-to {
+ /* JS se encarga de esto, pero lo dejamos por si JS falla */
   opacity: 0;
-  transform: translateY(-20px) scale(0.95);
+  transform: scale(0.9);
 }
 
 /* Animación de entrada escalonada para los productos */
