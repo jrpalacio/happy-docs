@@ -12,17 +12,21 @@ const currentTime = ref('')
 const currentDateInput = ref('')
 
 onMounted(() => {
-  // Inicializar si no hay fecha actual
-  if (!currentDate.value) {
-    initializeWithCurrentDate()
+  try {
+    // Inicializar si no hay fecha actual
+    if (!currentDate.value) {
+      initializeWithCurrentDate()
+    }
+    
+    // Establecer valores iniciales
+    currentDateInput.value = datePayload.value?.shortFormat || format(new Date(), 'yyyy-MM-dd', 'es')
+    currentTime.value = selectedTime.value || format(new Date(), 'HH:mm', 'es')
+    
+    // Actualizar la store con el tiempo inicial
+    updateSelectedTime(currentTime.value)
+  } catch (error) {
+    console.error('Error initializing date inputs:', error)
   }
-  
-  // Establecer valores iniciales
-  currentDateInput.value = datePayload.value?.shortFormat || format(new Date(), 'yyyy-MM-dd', 'es')
-  currentTime.value = selectedTime.value || format(new Date(), 'HH:mm', 'es')
-  
-  // Actualizar la store con el tiempo inicial
-  updateSelectedTime(currentTime.value)
 })
 
 // Observar cambios en la fecha
