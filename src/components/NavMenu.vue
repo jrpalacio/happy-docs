@@ -24,7 +24,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative" ref="menuRef">
+  <div ref="menuRef">
     <button
       @click="toggleMenu"
       type="button"
@@ -48,29 +48,44 @@ onUnmounted(() => {
     >
       <div
         v-if="isOpen"
-        class="absolute right-0 mt-2 w-56 origin-top-right rounded-xl bg-neutral-800/90 backdrop-blur-md shadow-lg ring-1 ring-white/10 focus:outline-none"
+        class="fixed inset-0 z-50 flex h-screen w-screen"
+        style="backdrop-filter: blur(6px);"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="menu-button"
         tabindex="-1"
       >
-        <div class="py-2" role="none">
-          <a
-            href="/dosis"
-            class="flex items-center gap-3 px-4 py-3 text-sm text-neutral-300 transition-colors duration-200 hover:bg-neutral-700 hover:text-white"
-            role="menuitem"
-            tabindex="-1"
+        <!-- Fondo semitransparente, cierra al hacer click -->
+        <div class="absolute inset-0 h-full w-full bg-black/40" @click="isOpen = false"></div>
+        <!-- Drawer -->
+        <div
+          class="relative ml-auto w-full max-w-xs h-full bg-neutral-800/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none flex flex-col"
+        >
+          <button
+            @click="isOpen = false"
+            class="absolute top-4 right-4 text-neutral-300 hover:text-white p-2 rounded-full bg-neutral-700/60 hover:bg-neutral-700 transition"
+            aria-label="Cerrar menú"
           >
-            <span>Dosis</span>
-          </a>
-          <a
-            href="/dosificacion"
-            class="flex items-center gap-3 px-4 py-3 text-sm text-neutral-300 transition-colors duration-200 hover:bg-neutral-700 hover:text-white"
-            role="menuitem"
-            tabindex="-1"
-          >
-            <span>Dosificación</span>
-          </a>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+          <div class="py-10 px-6 flex flex-col gap-2 mt-10">
+            <a
+              href="/dosis"
+              class="flex items-center gap-3 px-4 py-3 text-lg text-neutral-200 transition-colors duration-200 hover:bg-neutral-700 hover:text-white rounded-lg"
+              role="menuitem"
+              tabindex="-1"
+            >
+              <span>Dosis</span>
+            </a>
+            <a
+              href="/dosificacion"
+              class="flex items-center gap-3 px-4 py-3 text-lg text-neutral-200 transition-colors duration-200 hover:bg-neutral-700 hover:text-white rounded-lg"
+              role="menuitem"
+              tabindex="-1"
+            >
+              <span>Dosificación</span>
+            </a>
+          </div>
         </div>
       </div>
     </Transition>
