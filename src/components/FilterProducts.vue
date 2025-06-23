@@ -1,16 +1,38 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed } from 'vue'
+import type { PropType } from 'vue'
 
-const props = defineProps(['items', 'shopLink'])
+// --- Types ---
+interface ProductData {
+  nombre: string;
+  tipo: number;
+  img: string;
+  precio_publico: number;
+  contenido: string;
+  description: string;
+}
 
-const selected = ref(null)
+interface ProductItem {
+  data: ProductData;
+  slug: string;
+}
 
-const shopLink = props.shopLink
+// --- Props ---
+const props = defineProps({
+  items: {
+    type: Array as PropType<ProductItem[]>,
+    required: true,
+  },
+  shopLink: {
+    type: String,
+    required: true,
+  },
+})
 
-const categories = [...new Set(props.items.map(p => p.data.tipo))]
-// [1,2,3,4]
+// --- State ---
+const selectedCategory = ref<number | null>(null)
 
-// función que retorna el nombre, tipo ,img, precio_publico, contenido, description, slug
+// --- Computed Properties for Data ---
 const products = computed(() => {
   return props.items.map(p => ({
     nombre: p.data.nombre,
@@ -19,46 +41,73 @@ const products = computed(() => {
     precio_publico: p.data.precio_publico,
     contenido: p.data.contenido,
     description: p.data.description,
-    slug: p.slug  
+    slug: p.slug,
   }))
 })
 
 const filteredProducts = computed(() => {
-  if (selected.value === null) return products.value
-  return products.value.filter(p => p.tipo === selected.value)
+  if (selectedCategory.value === null) {
+    return products.value
+  }
+  return products.value.filter(p => p.tipo === selectedCategory.value)
 })
 
-const asideClass = "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0"
-const navClass = "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0"
-const buttonClass = "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]"
-const spanClass = "px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200"
-const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30 shadow-sm'
+const categoryMeta: Record<number, string> = {
+  1: 'Aceites',
+  2: 'Tópicos',
+  3: 'Cremas',
+  4: 'Gomitas',
+}
+
+const productCategories = computed(() => {
+  const counts = products.value.reduce((acc, product) => {
+    acc[product.tipo] = (acc[product.tipo] || 0) + 1
+    return acc
+  }, {} as Record<number, number>)
+
+  return Object.entries(categoryMeta)
+    .map(([id, name]) => ({
+      id: Number(id),
+      name,
+      count: counts[Number(id)] || 0,
+    }))
+    .filter(cat => cat.count > 0)
+})
+
+// --- CSS Classes ---
+const theme = {
+  aside: "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
+  nav: "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0",
+  button: "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]",
+  span: "px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200",
+  selectedButton: 'dark:bg-neutral-700/40 bg-neutral-200/30 shadow-sm',
+}
+
+function getButtonClass(categoryId: number | null) {
+  return [
+    theme.button,
+    selectedCategory.value === categoryId ? theme.selectedButton : ''
+  ]
+}
 </script>
 
 <template>
-  <aside :class="asideClass">
+  <aside :class="theme.aside">
     <div class="md:px-3 md:py-6">
-      <nav :class="navClass">
-      <button @click="selected = null" :class="[buttonClass, selected === null ? selectedButtonClass : '']" >
-        <span>Todos</span>
-        <span :class="spanClass">{{products.length}}</span>
-      </button> 
-      <button @click="selected = 1"  :class="[buttonClass, selected === 1 ? selectedButtonClass : '']">
-        <span>Aceites</span> 
-        <span :class="spanClass">6</span> 
-      </button>
-      <button @click="selected = 2"  :class="[buttonClass, selected === 2 ? selectedButtonClass : '']">
-        <span>Topicos</span> 
-        <span :class="spanClass">3</span> 
-      </button>
-      <button @click="selected = 3"  :class="[buttonClass, selected === 3 ? selectedButtonClass : '']">
-        <span>Cremas</span> 
-        <span :class="spanClass">2</span> 
-      </button>
-      <button @click="selected = 4"  :class="[buttonClass, selected === 4 ? selectedButtonClass : '']">
-        <span>Gomitas</span> 
-        <span :class="spanClass">1</span> 
-      </button>
+      <nav :class="theme.nav">
+        <button @click="selectedCategory = null" :class="getButtonClass(null)">
+          <span>Todos</span>
+          <span :class="theme.span">{{ products.length }}</span>
+        </button>
+        <button 
+          v-for="category in productCategories" 
+          :key="category.id" 
+          @click="selectedCategory = category.id" 
+          :class="getButtonClass(category.id)"
+        >
+          <span>{{ category.name }}</span>
+          <span :class="theme.span">{{ category.count }}</span>
+        </button>
       </nav>
     </div>
   </aside>
@@ -71,7 +120,7 @@ const selectedButtonClass = 'dark:bg-neutral-700/40 bg-neutral-200/30 shadow-sm'
       v-for="(producto, index) in filteredProducts"
       :key="producto.nombre"
       :data-index="index"
-      data-product-type={producto.tipo}
+      :data-product-type="producto.tipo"
       class="product-article relative flex flex-col h-[560px] lg:h-[650px] rounded-2xl bg-center bg-no-repeat bg-cover group overflow-hidden transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-black/20"
       :style="{ backgroundImage: `url(${producto.img})` }" 
     >      
