@@ -18,7 +18,11 @@ const statsStore = useProductStatsStore()
 
 // Inicializar las stores
 onMounted(() => {
-  productLogStore.initialize()
+  try {
+    productLogStore.initialize()
+  } catch (error) {
+    console.error('Error initializing product log store:', error)
+  }
 })
 
 // Obtener datos reactivos
