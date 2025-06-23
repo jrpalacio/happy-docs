@@ -30,7 +30,11 @@ const goToToday = () => {
 }
 
 onMounted(() => {
-  initializeWithCurrentDate()
+  try {
+    initializeWithCurrentDate()
+  } catch (error) {
+    console.error('Error initializing date store:', error)
+  }
 })
 
 const dateLongFormat = computed(() => {
