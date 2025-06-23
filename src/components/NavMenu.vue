@@ -56,7 +56,7 @@ onUnmounted(() => {
         tabindex="-1"
       >
         <!-- Fondo semitransparente, cierra al hacer click -->
-        <div class="absolute inset-0 h-full w-full bg-black/40" @click="isOpen = false"></div>
+        <div class="absolute inset-0 h-full w-full bg-black/80" @click="isOpen = false"></div>
         <!-- Drawer -->
         <div
           class="relative ml-auto w-full max-w-xs h-full bg-neutral-800/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none flex flex-col"
