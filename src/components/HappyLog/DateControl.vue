@@ -103,8 +103,8 @@ const getDateLabel = computed(() => {
       </div>
       
       <!-- Mes y año -->
-      <div class="text-white font-medium">
-        {{ formattedDate?.month || 'Mes' }} {{ formattedDate?.year || 'Año' }}
+      <div class="text-white text-sm">
+        {{ formattedDate?.month || 'Mes' }} de {{ formattedDate?.year || 'Año' }}
       </div>
       
       <!-- Botón "Ir a hoy" -->
