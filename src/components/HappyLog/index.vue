@@ -8,7 +8,7 @@ import DateControl from './DateControl.vue'
 import StatsPanel from './StatsPanel.vue'
 import DailyStats from './DailyStats.vue'
 
-import { useProductLogStore, useProductStatsStore } from '../../stores'
+import { useProductLogStore, useProductStatsStore, useDateStore } from '../../stores'
 import DropRegister from './DropRegister.vue'
 import IconTrash from './icons/IconTrash.vue'
 
@@ -16,13 +16,17 @@ import { HAPPY_ID_TO_PRODUCT } from '../../constants/happy-live.ts'
 
 const productLogStore = useProductLogStore()
 const statsStore = useProductStatsStore()
+const dateStore = useDateStore()
 
-// Inicializar las stores
+// Inicializar las stores en el orden correcto
 onMounted(() => {
   try {
+    // Primero inicializar la store de fechas
+    dateStore.initializeWithCurrentDate()
+    // Luego inicializar la store de productos
     productLogStore.initialize()
   } catch (error) {
-    console.error('Error initializing product log store:', error)
+    console.error('Error initializing stores:', error)
   }
 })
 
@@ -153,21 +157,21 @@ function getProductColor(productId: number): string {
           @click="productLogStore.setFilters({})"
           class="text-xs px-3 py-1 bg-orange-500 text-white rounded-full hover:bg-orange-600"
         >
-          Todos
+          Todos ({{ totalEntries }})
         </button>
         <button 
           @click="productLogStore.setFilters({ dateFrom: new Date().toISOString().split('T')[0] })"
           class="text-xs px-3 py-1 bg-neutral-700 text-white rounded-full hover:bg-neutral-600"
         >
-          Hoy
+          Hoy ({{ productLogStore.getTodayLogs().length }})
         </button>
         <button 
-          @click="productLogStore.getWeeklyLogs().length > 0 && productLogStore.setFilters({ 
+          @click="productLogStore.setFilters({ 
             dateFrom: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] 
           })"
           class="text-xs px-3 py-1 bg-neutral-700 text-white rounded-full hover:bg-neutral-600"
         >
-          Esta semana
+          Esta semana ({{ productLogStore.getWeeklyLogs().length }})
         </button>
         <button 
           @click="productLogStore.clearFilters()"
@@ -175,6 +179,10 @@ function getProductColor(productId: number): string {
         >
           Limpiar filtros
         </button>
+      </div>
+      <!-- Debug info -->
+      <div class="mt-2 text-xs text-gray-400">
+        Registros filtrados: {{ filteredLogs.length }} de {{ totalEntries }} total
       </div>
     </div>
 

@@ -31,7 +31,10 @@ const goToToday = () => {
 
 onMounted(() => {
   try {
-    initializeWithCurrentDate()
+    // Solo inicializar si no hay fecha actual
+    if (!currentDate.value) {
+      initializeWithCurrentDate()
+    }
   } catch (error) {
     console.error('Error initializing date store:', error)
   }

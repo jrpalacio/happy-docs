@@ -9,10 +9,18 @@ const { currentDate } = storeToRefs(dateStore)
 
 // Obtener registros del día seleccionado
 const dailyLogs = computed(() => {
-  if (!currentDate.value) return []
+  if (!currentDate.value) {
+    console.log('DailyStats: No hay fecha actual')
+    return []
+  }
   
   const selectedDate = currentDate.value.toISOString().split('T')[0]
-  return productLogStore.getLogsByDateRange(selectedDate, selectedDate)
+  console.log('DailyStats: Buscando registros para fecha:', selectedDate)
+  
+  const logs = productLogStore.getLogsByDateRange(selectedDate, selectedDate)
+  console.log('DailyStats: Registros encontrados:', logs.length)
+  
+  return logs
 })
 
 // Estadísticas del día
@@ -92,6 +100,12 @@ const hasEntries = computed(() => dailyStats.value.totalEntries > 0)
         </span>
       </div>
     </div>
+    
+    <!-- Debug info -->
+    <div class="mt-2 text-xs text-gray-500">
+      Fecha actual: {{ currentDate ? currentDate.toISOString().split('T')[0] : 'No disponible' }} | 
+      Registros del día: {{ dailyLogs.length }}
+    </div>
   </div>
   
   <!-- Mensaje cuando no hay registros -->
@@ -102,5 +116,10 @@ const hasEntries = computed(() => dailyStats.value.totalEntries > 0)
     <p class="text-gray-500 text-xs mt-1">
       Agrega tu primera dosis para comenzar
     </p>
+    <!-- Debug info -->
+    <div class="mt-2 text-xs text-gray-500">
+      Fecha actual: {{ currentDate ? currentDate.toISOString().split('T')[0] : 'No disponible' }} | 
+      Total registros: {{ productLogStore.productLogs.length }}
+    </div>
   </div>
 </template> 

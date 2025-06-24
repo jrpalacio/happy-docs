@@ -64,9 +64,9 @@ export const useProductLogStore = defineStore('productLog', () => {
     
     // Inicializar contadores
     Object.values(HAPPY_ID_TO_PRODUCT).forEach(productName => {
-      const productId = Object.entries(HAPPY_ID_TO_PRODUCT).find(([_, name]) => name === productName)?.[0] as HappyLiveProductsId
-      if (productId) {
-        counts[productId] = 0
+      const productId = Object.entries(HAPPY_ID_TO_PRODUCT).find(([_, name]) => name === productName)?.[0]
+      if (productId && Object.keys(HAPPY_ID_TO_PRODUCT).includes(productId)) {
+        counts[productId as unknown as HappyLiveProductsId] = 0
       }
     })
 
@@ -142,9 +142,14 @@ export const useProductLogStore = defineStore('productLog', () => {
   }
 
   function getLogsByDateRange(startDate: string, endDate: string): ProductLogEntry[] {
-    return _productLogs.value.filter(log => 
+    console.log('getLogsByDateRange:', { startDate, endDate, totalLogs: _productLogs.value.length })
+    
+    const filteredLogs = _productLogs.value.filter(log => 
       log.date >= startDate && log.date <= endDate
     )
+    
+    console.log('getLogsByDateRange: logs filtrados:', filteredLogs.length)
+    return filteredLogs
   }
 
   function getLogsByProduct(productId: HappyLiveProductsId): ProductLogEntry[] {
