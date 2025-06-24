@@ -3,9 +3,8 @@ import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
 
 import HappyDropper from '../../assets/images/happy-dropper.webp'
-import CalendarControl from './CalendarControl.vue'
+import DateControl from './DateControl.vue'
 import StatsPanel from './StatsPanel.vue'
-import DateDisplay from './DateDisplay.vue'
 import DailyStats from './DailyStats.vue'
 
 import { useProductLogStore, useProductStatsStore } from '../../stores'
@@ -61,11 +60,8 @@ function getProductColor(productId: number): string {
 </script>
 
 <template>
-  <CalendarControl client:only="vue"/>
+  <DateControl client:only="vue"/>
   <section class="p-4">
-    
-    <!-- Visualización de fecha -->
-    <DateDisplay />
     
     <!-- Estadísticas del día -->
     <DailyStats />
