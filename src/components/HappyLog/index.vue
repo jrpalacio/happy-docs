@@ -10,6 +10,7 @@ import DailyStats from './DailyStats.vue'
 
 import { useProductLogStore, useProductStatsStore } from '../../stores'
 import DropRegister from './DropRegister.vue'
+import IconTrash from './icons/IconTrash.vue'
 
 import { HAPPY_ID_TO_PRODUCT } from '../../constants/happy-live.ts'
 
@@ -83,13 +84,13 @@ function getProductColor(productId: number): string {
     </main>
 
     <!-- Estadísticas rápidas -->
-    <div v-if="allProductStats.length > 0" class="mt-4 p-3 bg-gray-800 rounded-lg">
+    <div v-if="allProductStats.length > 0" class="mt-4 p-3 bg-neutral-800 rounded-lg">
       <h3 class="text-white font-semibold mb-2">Productos más usados</h3>
       <div class="flex flex-wrap gap-2">
         <span 
           v-for="stat in allProductStats.slice(0, 3)" 
           :key="stat.productId"
-          class="text-xs px-2 py-1 bg-gray-700 rounded-full text-white"
+          class="text-xs px-2 py-1 bg-neutral-700 rounded-full text-white"
         >
           {{ stat.productName }}: {{ stat.totalEntries }}
         </span>
@@ -102,37 +103,35 @@ function getProductColor(productId: number): string {
         <li 
           v-for="log in filteredLogs" 
           :key="log.id"
-          class="flex items-center justify-between gap-3 p-3 bg-gray-800 rounded-lg border-l-4 border-orange-500"
+          class="flex flex-col gap-3 p-3 bg-neutral-800 rounded-lg border-l-4 border-orange-500"
         >
-          <div class="flex flex-col ">
-            <span :class="getProductColor(log.productId)" class="font-medium w-[max-content] mb-1">
-              {{ log.productName }}
-            </span>
-            <p class="flex items-center gap-1 text-xs text-gray-400 font-bold w-[max-content]">
-              <span>{{ log.portion }} {{log.portion > 1 ? 'gotas' : 'gota'}}</span>
-              <IconClock class="size-4"/>
-              <span>{{ log.time }} hrs</span>
-            </p>
-          </div>
-          
-          <div>
-            <div class="flex items-center space-x-3">
-              <span class="text-gray-400 text-sm">{{ log.date }}</span>
-              <button 
-                @click="productLogStore.deleteProductLog(log.id)"
-                class="text-red-400 hover:text-red-300 text-sm"
-                title="Eliminar registro"
-              >
-                ×
-              </button>
+          <section class="flex items-center justify-between gap-3">
+            <div class="flex flex-col ">
+              <span :class="getProductColor(log.productId)" class="font-medium w-[max-content] mb-1">
+                {{ log.productName }}
+              </span>
+              <p class="flex items-center gap-1 text-xs text-gray-400 font-bold w-[max-content]">
+                <span>{{ log.portion }} {{log.portion > 1 ? 'gotas' : 'gota'}}</span>
+                <IconClock class="size-4"/>
+                <span>{{ log.time }} hrs</span>
+              </p>
             </div>
-            <!-- Notas si existen -->
-            <div v-if="log.notes" class="w-full mt-2 text-gray-300 text-sm italic">
-              "{{ log.notes }}"
-            </div>
+            
+            <div class="flex items-center gap-3">
+                <span class="text-gray-400 text-sm">{{ log.date }}</span>
+                <button 
+                  @click="productLogStore.deleteProductLog(log.id)"
+                  class="text-red-400 hover:text-red-300 text-sm"
+                  title="Eliminar registro"
+                >
+                  <IconTrash class="size-4"/>
+                </button>
+              </div>
+          </section>
+          <!-- Notas si existen -->
+          <div v-if="log.notes" class="w-full mt-2 text-gray-300 text-sm italic">
+            "{{ log.notes }}"
           </div>
-          
-          
         </li>
       </ul>
     </template>
@@ -147,7 +146,7 @@ function getProductColor(productId: number): string {
     </template>
 
     <!-- Filtros rápidos -->
-    <div v-if="filteredLogs.length > 0" class="mt-6 p-3 bg-gray-800 rounded-lg">
+    <div v-if="filteredLogs.length > 0" class="mt-6 p-3 bg-neutral-800 rounded-lg">
       <h3 class="text-white font-semibold mb-2">Filtros rápidos</h3>
       <div class="flex flex-wrap gap-2">
         <button 
@@ -158,7 +157,7 @@ function getProductColor(productId: number): string {
         </button>
         <button 
           @click="productLogStore.setFilters({ dateFrom: new Date().toISOString().split('T')[0] })"
-          class="text-xs px-3 py-1 bg-gray-700 text-white rounded-full hover:bg-gray-600"
+          class="text-xs px-3 py-1 bg-neutral-700 text-white rounded-full hover:bg-neutral-600"
         >
           Hoy
         </button>
@@ -166,13 +165,13 @@ function getProductColor(productId: number): string {
           @click="productLogStore.getWeeklyLogs().length > 0 && productLogStore.setFilters({ 
             dateFrom: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString().split('T')[0] 
           })"
-          class="text-xs px-3 py-1 bg-gray-700 text-white rounded-full hover:bg-gray-600"
+          class="text-xs px-3 py-1 bg-neutral-700 text-white rounded-full hover:bg-neutral-600"
         >
           Esta semana
         </button>
         <button 
           @click="productLogStore.clearFilters()"
-          class="text-xs px-3 py-1 bg-gray-600 text-white rounded-full hover:bg-gray-500"
+          class="text-xs px-3 py-1 bg-neutral-600 text-white rounded-full hover:bg-neutral-500"
         >
           Limpiar filtros
         </button>
