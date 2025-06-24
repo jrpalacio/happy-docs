@@ -56,7 +56,7 @@ const hasEntries = computed(() => dailyStats.value.totalEntries > 0)
 </script>
 
 <template>
-  <div v-if="hasEntries" class="bg-gray-800 rounded-lg p-4 mb-4">
+  <div v-if="hasEntries" class="bg-neutral-800 rounded-lg p-4 mb-4">
     <div class="flex items-center justify-between mb-3">
       <h3 class="text-white font-semibold">
         {{ isToday ? 'Hoy' : 'Día seleccionado' }}
@@ -95,7 +95,7 @@ const hasEntries = computed(() => dailyStats.value.totalEntries > 0)
   </div>
   
   <!-- Mensaje cuando no hay registros -->
-  <div v-else class="bg-gray-800 rounded-lg p-4 mb-4 text-center">
+  <div v-else class="bg-neutral-800 rounded-lg p-4 mb-4 text-center">
     <p class="text-gray-400 text-sm">
       {{ isToday ? 'No hay registros para hoy' : 'No hay registros para este día' }}
     </p>

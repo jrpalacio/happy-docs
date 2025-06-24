@@ -32,7 +32,7 @@ const handleClose = () => {
             <button
               @click="handleClose"
               type="button"
-              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              class="text-gray-400 bg-transparent hover:bg-neutral-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-neutral-600 dark:hover:text-white"
             >
               <svg class="w-3 h-3" fill="none" viewBox="0 0 14 14">
                 <path

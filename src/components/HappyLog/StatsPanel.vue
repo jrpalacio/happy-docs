@@ -35,7 +35,7 @@ function formatDate(dateStr: string): string {
     <!-- Botón para mostrar/ocultar estadísticas -->
     <button 
       @click="showStats = !showStats"
-      class="text-white p-2 bg-gray-700 rounded-lg hover:bg-gray-600 transition-colors text-sm"
+      class="text-white p-2 bg-neutral-700 rounded-lg hover:bg-neutral-600 transition-colors text-sm"
     >
       {{ showStats ? 'Ocultar' : 'Mostrar' }} estadísticas
     </button>
@@ -43,7 +43,7 @@ function formatDate(dateStr: string): string {
     <!-- Panel de estadísticas -->
     <div v-if="showStats" class="mt-4 space-y-4">
       <!-- Estadísticas generales -->
-      <div class="bg-gray-800 rounded-lg p-4">
+      <div class="bg-neutral-800 rounded-lg p-4">
         <h3 class="text-white font-semibold mb-3">Resumen general</h3>
         <div class="grid grid-cols-2 gap-4 text-sm">
           <div class="text-gray-300">
@@ -72,13 +72,13 @@ function formatDate(dateStr: string): string {
       </div>
 
       <!-- Productos más usados -->
-      <div v-if="topProducts.length > 0" class="bg-gray-800 rounded-lg p-4">
+      <div v-if="topProducts.length > 0" class="bg-neutral-800 rounded-lg p-4">
         <h3 class="text-white font-semibold mb-3">Productos más usados</h3>
         <div class="space-y-2">
           <div 
             v-for="product in topProducts" 
             :key="product.productId"
-            class="flex items-center justify-between p-2 bg-gray-700 rounded"
+            class="flex items-center justify-between p-2 bg-neutral-700 rounded"
           >
             <span class="text-white text-sm">{{ product.productName }}</span>
             <div class="flex items-center space-x-2">
@@ -90,7 +90,7 @@ function formatDate(dateStr: string): string {
       </div>
 
       <!-- Productos no usados recientemente -->
-      <div v-if="notUsedRecently.length > 0" class="bg-gray-800 rounded-lg p-4">
+      <div v-if="notUsedRecently.length > 0" class="bg-neutral-800 rounded-lg p-4">
         <h3 class="text-white font-semibold mb-3">No usados en 7 días</h3>
         <div class="flex flex-wrap gap-2">
           <span 
@@ -104,13 +104,13 @@ function formatDate(dateStr: string): string {
       </div>
 
       <!-- Tendencias semanales -->
-      <div v-if="weeklyTrends.length > 0" class="bg-gray-800 rounded-lg p-4">
+      <div v-if="weeklyTrends.length > 0" class="bg-neutral-800 rounded-lg p-4">
         <h3 class="text-white font-semibold mb-3">Actividad esta semana</h3>
         <div class="space-y-2">
           <div 
             v-for="trend in weeklyTrends.slice(-7)" 
             :key="trend.date"
-            class="flex items-center justify-between p-2 bg-gray-700 rounded"
+            class="flex items-center justify-between p-2 bg-neutral-700 rounded"
           >
             <span class="text-gray-300 text-sm">{{ formatDate(trend.date) }}</span>
             <div class="flex items-center space-x-2">
