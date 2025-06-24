@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
 import { onMounted } from 'vue'
+import IconClock from './icons/IconClock.vue'
 
 import HappyDropper from '../../assets/images/happy-dropper.webp'
 import DateControl from './DateControl.vue'
@@ -101,34 +102,37 @@ function getProductColor(productId: number): string {
         <li 
           v-for="log in filteredLogs" 
           :key="log.id"
-          class="flex items-center justify-between p-3 bg-gray-800 rounded-lg border-l-4 border-orange-500"
+          class="flex items-center justify-between gap-3 p-3 bg-gray-800 rounded-lg border-l-4 border-orange-500"
         >
-          <div class="flex items-center space-x-3">
-            <div class="flex items-center space-x-2">
-              <span class="text-orange-400 font-bold">{{ log.portion }}</span>
-              <span class="text-gray-400">gotas</span>
-            </div>
-            <span :class="getProductColor(log.productId)" class="font-medium">
+          <div class="flex flex-col ">
+            <span :class="getProductColor(log.productId)" class="font-medium w-[max-content] mb-1">
               {{ log.productName }}
             </span>
+            <p class="flex items-center gap-1 text-xs text-gray-400 font-bold w-[max-content]">
+              <span>{{ log.portion }} {{log.portion > 1 ? 'gotas' : 'gota'}}</span>
+              <IconClock class="size-4"/>
+              <span>{{ log.time }} hrs</span>
+            </p>
           </div>
           
-          <div class="flex items-center space-x-3">
-            <span class="text-gray-300 text-sm">{{ log.time }}</span>
-            <span class="text-gray-400 text-sm">{{ log.date }}</span>
-            <button 
-              @click="productLogStore.deleteProductLog(log.id)"
-              class="text-red-400 hover:text-red-300 text-sm"
-              title="Eliminar registro"
-            >
-              ×
-            </button>
+          <div>
+            <div class="flex items-center space-x-3">
+              <span class="text-gray-400 text-sm">{{ log.date }}</span>
+              <button 
+                @click="productLogStore.deleteProductLog(log.id)"
+                class="text-red-400 hover:text-red-300 text-sm"
+                title="Eliminar registro"
+              >
+                ×
+              </button>
+            </div>
+            <!-- Notas si existen -->
+            <div v-if="log.notes" class="w-full mt-2 text-gray-300 text-sm italic">
+              "{{ log.notes }}"
+            </div>
           </div>
           
-          <!-- Notas si existen -->
-          <div v-if="log.notes" class="w-full mt-2 text-gray-300 text-sm italic">
-            "{{ log.notes }}"
-          </div>
+          
         </li>
       </ul>
     </template>
