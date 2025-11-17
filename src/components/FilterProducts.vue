@@ -54,9 +54,10 @@ const filteredProducts = computed(() => {
 
 const categoryMeta: Record<number, string> = {
   1: 'Aceites',
-  2: 'Tópicos',
+  2: 'Tópicos', 
   3: 'Cremas',
   4: 'Gomitas',
+  5: 'Adaptógenos',
 }
 // Optimized: single pass counting + direct building of existing categories only
 const productCategories = computed(() => {
