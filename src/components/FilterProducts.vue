@@ -77,27 +77,7 @@ const productCategories = computed(() => {
   return result
 })
 
-// --- Animation Hook ---
-function onLeave(el: Element, done: () => void) {
-  const htmlEl = el as HTMLElement;
-  const { offsetLeft, offsetTop, clientWidth, clientHeight } = htmlEl;
-
-  // Pin the element to its current position before the layout shifts
-  htmlEl.style.position = 'absolute';
-  htmlEl.style.left = `${offsetLeft}px`;
-  htmlEl.style.top = `${offsetTop}px`;
-  htmlEl.style.width = `${clientWidth}px`;
-  htmlEl.style.height = `${clientHeight}px`;
-
-  // Animate it out and signal Vue when done
-  htmlEl.animate([
-    { transform: 'scale(1)', opacity: 1 },
-    { transform: 'scale(0.9)', opacity: 0 }
-  ], {
-    duration: 300,
-    easing: 'cubic-bezier(0.55, 0.055, 0.675, 0.19)'
-  }).onfinish = done;
-}
+// --- Animation Hook --- (removed for simpler animations)
 
 // --- CSS Classes --- (frozen to avoid reactive proxy overhead)
 const theme = Object.freeze({
@@ -140,7 +120,6 @@ function getButtonClass(categoryId: number | null) {
     tag="section"
     name="product-grid"
     class="products md:ml-[calc(14rem)] p-4 md:p-8 lg:p-16"
-    @leave="onLeave"
   >
     <article
       v-for="(producto, index) in filteredProducts"
@@ -214,101 +193,25 @@ function getButtonClass(categoryId: number | null) {
     -webkit-line-clamp: 2;
     line-clamp: 2; /* Standard property for broader compatibility */
   }
-	
-</style>
 
-<style>
-/* Animaciones optimizadas para el rendimiento */
-.product-grid-move {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.product-grid-enter-active {
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.product-grid-enter-from {
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-}
-
-.product-grid-leave-to {
- /* JS se encarga de esto, pero lo dejamos por si JS falla */
-  opacity: 0;
-  transform: scale(0.9);
-}
-
-/* Animación de entrada escalonada para los productos */
-.product-article {
-  animation: fadeInUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-.product-article:nth-child(1) { animation-delay: 0.1s; }
-.product-article:nth-child(2) { animation-delay: 0.15s; }
-.product-article:nth-child(3) { animation-delay: 0.2s; }
-.product-article:nth-child(4) { animation-delay: 0.25s; }
-.product-article:nth-child(5) { animation-delay: 0.3s; }
-.product-article:nth-child(6) { animation-delay: 0.35s; }
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px) scale(0.95);
+  /* Animación sencilla: solo levantar la card en hover */
+  .product-article {
+    will-change: transform;
+    backface-visibility: hidden;
+    transition: transform 200ms ease;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
+
+  .product-article:hover {
+    transform: translateY(-6px);
   }
-}
 
-/* Optimizaciones para el rendimiento */
-.product-article {
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  transform: translateZ(0);
-}
-
-/* Hover effects suaves */
-.product-article:hover {
-  transform: translateY(-8px) scale(1.02);
-}
-
-/* Scoped transitions instead of universal selector (improves rendering performance) */
-.product-article,
-.product-article header,
-.product-article h5,
-.product-article .information-basica,
-.product-article a {
-  transition-property: transform, opacity, color, background-color;
-  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Animación de carga para imágenes */
-.product-article::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-  transform: translateX(-100%);
-  transition: transform 0.6s;
-}
-
-.product-article:hover::before {
-  transform: translateX(100%);
-}
-
-/* Mejoras en la accesibilidad */
-@media (prefers-reduced-motion: reduce) {
-  .product-article,
-  .product-article *,
-  .product-grid-move,
-  .product-grid-enter-active,
-  .product-grid-leave-active {
-    animation: none !important;
+  /* Desactivar transiciones internas para mantenerlo simple */
+  .product-article header,
+  .product-article h5,
+  .product-article .information-basica,
+  .product-article a,
+  .product-article > .absolute {
     transition: none !important;
   }
-}
+	
 </style>
