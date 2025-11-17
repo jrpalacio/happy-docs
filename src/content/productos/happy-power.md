@@ -10,7 +10,7 @@ ingredientes:
 
 puntos: 20
 precio_publico: 850
-tipo: 1
+tipo: 5
 img: "/images/products/IMG_H_POWER.webp"
 
 precio_distribuidor:
@@ -29,12 +29,13 @@ tags: ["energía", "vitalidad", "sueño", "vitalidad", "metabolismo", "estrés",
 description: "Este suplemento está diseñado para aumentar la energía y la vitalidad de manera natural. Ayuda a reducir el estrés y la ansiedad, al mismo tiempo que refuerza el sistema inmunológico. Su fórmula también contribuye a mejorar la concentración y el enfoque mental, apoyando el equilibrio hormonal y promoviendo un estado general de bienestar."
 ---
 
-## 🌿 Tu bienestar empieza con una gota
+## 🌿 Tu bienestar empieza con una capsula
 
-¿Sientes que el estrés, el dolor o el insomnio están apagando tu energía diaria?  
-**Happy Power** es una fórmula premium de CBD que ayuda a recuperar el equilibrio natural de tu cuerpo y tu mente.
+Gracias a su fórmula natural, ayuda a tu cuerpo a adaptarse mejor al estrés, disminuye la ansiedad y potencia tu energía de forma sostenible. Además, refuerza tu sistema inmunológico y mejora tu concentración, permitiéndote rendir mejor sin sentirte saturado.
 
-Ideal para quienes buscan una alternativa natural, efectiva y sin efectos psicoactivos.
+Es ese impulso que tu bienestar lleva tiempo pidiendo: apoyo hormonal, claridad mental y una sensación de vitalidad que se nota desde adentro hacia afuera.
+
+Porque cuando tu cuerpo está en equilibrio… todo empieza a fluir.
 
 ## ✨ Beneficios que sentirás
 
