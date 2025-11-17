@@ -71,11 +71,12 @@ onUnmounted(() => {
           <div class="py-10 px-6 flex flex-col gap-2 mt-10">
             <a
               href="/dosis"
-              class="flex items-center gap-3 px-4 py-3 text-lg text-neutral-200 transition-colors duration-200 hover:bg-neutral-700 hover:text-white rounded-lg"
+              class="flex flex-col gap-3 px-4 py-3 text-lg text-neutral-200 transition-colors duration-200 hover:bg-neutral-700 hover:text-white rounded-lg"
               role="menuitem"
               tabindex="-1"
             >
-              <span>Dosis</span>
+              <span> 📱 Bitacora </span>
+              <small class="text-neutral-600 hover:text-neutral-400">Esta es una aplicación donde podras registrar tus dosis y efectos.</small>
             </a>
             <a
               href="/dosificacion"
@@ -83,7 +84,7 @@ onUnmounted(() => {
               role="menuitem"
               tabindex="-1"
             >
-              <span>Dosificación</span>
+              <span>Mi dosis</span>
             </a>
           </div>
         </div>
