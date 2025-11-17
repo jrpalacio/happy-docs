@@ -58,20 +58,23 @@ const categoryMeta: Record<number, string> = {
   3: 'Cremas',
   4: 'Gomitas',
 }
-
+// Optimized: single pass counting + direct building of existing categories only
 const productCategories = computed(() => {
-  const counts = products.value.reduce((acc, product) => {
-    acc[product.tipo] = (acc[product.tipo] || 0) + 1
-    return acc
-  }, {} as Record<number, number>)
-
-  return Object.entries(categoryMeta)
-    .map(([id, name]) => ({
-      id: Number(id),
-      name,
-      count: counts[Number(id)] || 0,
-    }))
-    .filter(cat => cat.count > 0)
+  const counts: Record<number, number> = {}
+  const list = products.value
+  for (let i = 0; i < list.length; i++) {
+    const tipo = list[i].tipo
+    counts[tipo] = (counts[tipo] || 0) + 1
+  }
+  const result: { id: number; name: string; count: number }[] = []
+  for (const id in categoryMeta) {
+    const numericId = +id
+    const count = counts[numericId]
+    if (count) {
+      result.push({ id: numericId, name: categoryMeta[numericId], count })
+    }
+  }
+  return result
 })
 
 // --- Animation Hook ---
@@ -96,14 +99,14 @@ function onLeave(el: Element, done: () => void) {
   }).onfinish = done;
 }
 
-// --- CSS Classes ---
-const theme = {
+// --- CSS Classes --- (frozen to avoid reactive proxy overhead)
+const theme = Object.freeze({
   aside: "z-50 w-full overflow-y-auto overflow-x-hidden opacity-95 backdrop-blur-sm border-b border-neutral-800 bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
   nav: "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0",
   button: "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out hover:text-white text-neutral-400 hover:bg-neutral-200 hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]",
   span: "px-2.5 py-0.5 rounded-full font-medium bg-neutral-800/50 border border-neutral-800 text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200",
   selectedButton: 'bg-neutral-700/40 shadow-sm',
-}
+})
 
 function getButtonClass(categoryId: number | null) {
   return [
@@ -141,7 +144,7 @@ function getButtonClass(categoryId: number | null) {
   >
     <article
       v-for="(producto, index) in filteredProducts"
-      :key="producto.nombre"
+      :key="producto.slug"
       :data-index="index"
       :data-product-type="producto.tipo"
       class="product-article relative flex flex-col h-[560px] lg:h-[650px] rounded-2xl bg-center bg-no-repeat bg-cover group overflow-hidden transition-all duration-500 ease-out hover:shadow-2xl hover:shadow-black/20"
@@ -209,6 +212,7 @@ function getButtonClass(categoryId: number | null) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-clamp: 2; /* Standard property for broader compatibility */
   }
 	
 </style>
@@ -269,8 +273,12 @@ function getButtonClass(categoryId: number | null) {
   transform: translateY(-8px) scale(1.02);
 }
 
-/* Transiciones suaves para elementos internos */
-.product-article * {
+/* Scoped transitions instead of universal selector (improves rendering performance) */
+.product-article,
+.product-article header,
+.product-article h5,
+.product-article .information-basica,
+.product-article a {
   transition-property: transform, opacity, color, background-color;
   transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
