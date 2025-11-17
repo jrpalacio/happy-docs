@@ -98,11 +98,11 @@ function onLeave(el: Element, done: () => void) {
 
 // --- CSS Classes ---
 const theme = {
-  aside: "z-50 w-full overflow-y-auto overflow-x-hidden bg-white opacity-95 backdrop-blur-md border-b border-neutral-200 dark:border-neutral-800 dark:bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
+  aside: "z-50 w-full overflow-y-auto overflow-x-hidden opacity-95 backdrop-blur-sm border-b border-neutral-800 bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
   nav: "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0",
-  button: "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out text-neutral-600 hover:text-dark dark:hover:text-white dark:text-neutral-400 hover:bg-neutral-200 dark:hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]",
-  span: "px-2.5 py-0.5 rounded-full font-medium bg-neutral-100 dark:bg-neutral-800/50 border border-neutral-200 dark:border-neutral-800 text-neutral-600 dark:text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200",
-  selectedButton: 'dark:bg-neutral-700/40 bg-neutral-200/30 shadow-sm',
+  button: "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out hover:text-white text-neutral-400 hover:bg-neutral-200 hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]",
+  span: "px-2.5 py-0.5 rounded-full font-medium bg-neutral-800/50 border border-neutral-800 text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200",
+  selectedButton: 'bg-neutral-700/40 shadow-sm',
 }
 
 function getButtonClass(categoryId: number | null) {
@@ -221,10 +221,6 @@ function getButtonClass(categoryId: number | null) {
 
 .product-grid-enter-active {
   transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.product-grid-leave-active {
-  /* Ya no necesitamos transiciones aquí, JS lo maneja */
 }
 
 .product-grid-enter-from {
