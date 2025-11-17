@@ -1,0 +1,23 @@
+---
+import WhatsApp from '../assets/svg/whatsapp.svg'
+
+const phone = '7223563625'
+const message = '¡Hola! Me gustaría probar los productos de Happy Live. ¿Podrías brindarme más información?'
+const whatsappLink = `https://wa.me/521${phone}?text=${encodeURIComponent(message)}`
+---
+
+<a href={whatsappLink} 
+	target="_blank" 
+	aria-label="WhatsApp" 
+	rel="noopener noreferrer" 
+	title="Ir al perfil de WhatsApp de José Reyes Palacio"
+	class="whatsapp--shadow text-white fixed bottom-6 right-6 z-50  bg-[#25D366] p-4 rounded-full ">
+		<WhatsApp class="size-8 object-cover"/>
+	</a>
+
+    <style>
+        .whatsapp--shadow{
+        box-shadow: 0 0 24px 0 rgba(37, 211, 102, .5);
+    }
+    </style>
+    
