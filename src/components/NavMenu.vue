@@ -59,7 +59,7 @@ onUnmounted(() => {
         <div class="absolute inset-0 h-full w-full bg-black/80" @click="isOpen = false"></div>
         <!-- Drawer -->
         <div
-          class="relative ml-auto w-full max-w-xs h-full bg-neutral-800/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none flex flex-col"
+          class="relative ml-auto w-full max-w-xs h-full bg-neutral-800/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none flex flex-col "
         >
           <button
             @click="isOpen = false"
@@ -75,8 +75,8 @@ onUnmounted(() => {
               role="menuitem"
               tabindex="-1"
             >
-              <span> 📱 Bitacora </span>
-              <small class="text-neutral-600 hover:text-neutral-400">Esta es una aplicación donde podras registrar tus dosis y efectos.</small>
+              <span> 📱 Bitacorapp </span>
+              <small class="text-neutral-500 ">Esta es una aplicación donde podras registrar tus dosis y efectos.</small>
             </a>
             <a
               href="/dosificacion"
@@ -87,6 +87,7 @@ onUnmounted(() => {
               <span>Mi dosis</span>
             </a>
           </div>
+          <a href="https://jrpalacio-dev.vercel.app/#" target="_blank" rel="noopener noreferrer" class="text-neutral-600 text-center absolute bottom-4 w-full">jrpalacio.dev</a>
         </div>
       </div>
     </Transition>
