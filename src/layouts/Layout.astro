@@ -2,6 +2,7 @@
 import '../styles/global.css'
 import Nav from '../components/Nav.astro';
 import { ClientRouter } from 'astro:transitions';
+import WhatsappButton from '../components/WhatsappButton.astro';
 const { title } = Astro.props;
 const siteUrl = 'https://happy-docs.vercel.app/'
 const description = "Conoce los usos, beneficios y dosificación del CBD de Happy Live"
@@ -71,6 +72,7 @@ const description = "Conoce los usos, beneficios y dosificación del CBD de Happ
 	<body class="min-h-screen scroll-smooth bg-[#161a19] antialiased selection:bg-neutral-700 selection:text-neutral-300">
 		<Nav />
 		<slot />
+		<WhatsappButton />
 	</body>
 </html>
 
