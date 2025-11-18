@@ -61,6 +61,7 @@ onUnmounted(() => {
         <div
           class="relative ml-auto w-full max-w-xs h-full bg-neutral-800/95 backdrop-blur-xl shadow-xl ring-1 ring-white/10 focus:outline-none flex flex-col "
         >
+          <h3 class="text-white text-2xl font-bold p-4">Happy Docs</h3>
           <button
             @click="isOpen = false"
             class="absolute top-4 right-4 text-neutral-300 hover:text-white p-2 rounded-full bg-neutral-700/60 hover:bg-neutral-700 transition"
@@ -87,7 +88,6 @@ onUnmounted(() => {
               <span>Mi dosis</span>
             </a>
           </div>
-          <a href="https://jrpalacio-dev.vercel.app/#" target="_blank" rel="noopener noreferrer" class="text-neutral-600 text-center absolute bottom-4 w-full">jrpalacio.dev</a>
         </div>
       </div>
     </Transition>
