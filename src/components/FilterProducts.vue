@@ -1,21 +1,8 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import type { PropType } from 'vue'
+import type { ProductItem } from '../types/products'
 
-// --- Types ---
-interface ProductData {
-  nombre: string;
-  tipo: number;
-  img: string;
-  precio_publico: number;
-  contenido: string;
-  description: string;
-}
-
-interface ProductItem {
-  data: ProductData;
-  slug: string;
-}
 
 // --- Props ---
 const props = defineProps({
@@ -82,7 +69,7 @@ const productCategories = computed(() => {
 
 // --- CSS Classes --- (frozen to avoid reactive proxy overhead)
 const theme = Object.freeze({
-  aside: "z-50 w-full overflow-y-auto overflow-x-hidden opacity-95 backdrop-blur-sm border-b border-neutral-800 bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
+  aside: "z-10 w-full overflow-y-auto overflow-x-hidden opacity-95 backdrop-blur-sm border-b border-neutral-800 bg-neutral-900 md:border-r md:fixed md:left-0 md:h-[calc(100vh-57px)] md:w-56 md:pb-0",
   nav: "flex items-center space-x-1 overflow-y-auto px-6 pb-2 pt-2 md:mb-3 md:flex-col md:space-x-0 md:space-y-1 md:overflow-y-visible md:px-0 md:pt-0",
   button: "w-full flex items-center justify-center md:justify-between rounded-md p-2 transition-all duration-200 ease-out hover:text-white text-neutral-400 hover:bg-neutral-200 hover:bg-neutral-700/40 text-sm transform hover:scale-[1.02] active:scale-[0.98]",
   span: "px-2.5 py-0.5 rounded-full font-medium bg-neutral-800/50 border border-neutral-800 text-neutral-400 hidden font-mono text-xs md:inline transition-all duration-200",
@@ -165,6 +152,7 @@ function getButtonClass(categoryId: number | null) {
       </div>
     </article>
   </TransitionGroup>
+ 
 </template>
 
 <style scoped>
