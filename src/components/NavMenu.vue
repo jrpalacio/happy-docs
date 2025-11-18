@@ -31,7 +31,7 @@ onUnmounted(() => {
       class="flex items-center gap-2 p-2 rounded-lg transition-colors duration-200"
       :class="{
         'bg-neutral-700 text-white': isOpen,
-        'text-neutral-400 hover:bg-neutral-800 hover:text-white': !isOpen
+        'text-neutral-400 hover:bg-neutral-800  hover:text-emerald-400 transition': !isOpen
       }"
     >
       <slot name="icon" />

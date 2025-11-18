@@ -5,12 +5,12 @@ import NavMenu from './NavMenu.vue';
 import MenuIcon from '../assets/svg/menu.svg';
 ---
 <header class="sticky top-0 z-50 border-b border-neutral-800  backdrop-blur-sm bg-neutral-900/90">
-    <nav class="w-full  px-5 py-4 flex justify-between text-neutral-100">
-        <a href="/"><strong>Happy Docs</strong></a>
+    <nav class="w-full  px-5 py-4 flex items-center justify-between text-neutral-200">
+        <a href="/" class="hover:text-emerald-400"><strong>Happy Docs</strong></a>
         <ul class="flex items-center gap-4">
             <li>
               <a href={shopLink.href} target="_blank" class="opacity-80 transition-opacity hover:opacity-100" title={shopLink.title}>
-                <BuildingStore class="size-5"/>
+                <BuildingStore class="size-5 hover:text-emerald-400"/>
               </a>
             </li>
             <li>
